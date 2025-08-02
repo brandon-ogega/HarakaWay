@@ -12,14 +12,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
@@ -30,7 +28,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,7 +38,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.harakaway.data.models.BottomNavBarItem
 import com.example.harakaway.ui.components.Navigation
-import com.example.harakaway.ui.screens.AppliedJobsPage
 import com.example.harakaway.ui.screens.Routes
 import com.example.harakaway.ui.theme.HarakaWayTheme
 import kotlinx.coroutines.delay
@@ -68,8 +64,8 @@ class MainActivity : ComponentActivity() {
                     ),
                     BottomNavBarItem(
                         title = Routes.AppliedJobPage.name,
-                        iconSelected = Icons.Filled.Email,
-                        iconNotSelected = Icons.Outlined.Email,
+                        iconCustomSelected = R.drawable.basket,
+                        iconCustomNotSelected = R.drawable.basket,
                     ),
                     BottomNavBarItem(
                         title = Routes.JobDetailPage.name,
@@ -120,13 +116,31 @@ class MainActivity : ComponentActivity() {
                                                         )
                                                     }
                                                 }
-                                            } else {
+                                            } else if (item.iconNotSelected != null) {
                                                 item.iconNotSelected?.let {
                                                     Icon(
                                                         imageVector = it,
                                                         contentDescription = "icon of ${item.title}",
                                                         modifier = Modifier.size(24.dp)
                                                     )
+                                                }
+                                            }
+                                            else if(item.iconCustomSelected != null){
+                                                item.iconCustomSelected?.let{
+//                                                    Icon(
+//                                                        imageVector = Int,
+//                                                       contentDescription ="Icon of ${item.title}",
+//                                                        modifier = Modifier.size(24.dp)
+//                                                    )
+                                                }
+                                            }
+                                            else if (item.iconCustomNotSelected != null){
+                                                item.iconCustomNotSelected?.let{
+//                                                    Icon(
+//                                                        imageVector = Int,
+//                                                        contentDescription ="Icon of ${item.title}",
+//                                                        modifier = Modifier.size(24.dp)
+//                                                    )
                                                 }
                                             }
                                         },
@@ -139,7 +153,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     Box(
                         modifier = Modifier
-                            .background(Color.DarkGray)
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
                             .padding(innerPadding)
                             .fillMaxSize()
                     ) {

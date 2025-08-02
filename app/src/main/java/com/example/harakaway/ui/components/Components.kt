@@ -6,7 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.harakaway.ui.screens.AppliedJobsPage
 import com.example.harakaway.ui.screens.HomePage
+import com.example.harakaway.ui.screens.JobDetailPage
 import com.example.harakaway.ui.screens.Routes
 
 // navigation
@@ -15,7 +17,7 @@ fun Navigation(navController: NavHostController, innerPaddingValues: PaddingValu
 
     NavHost(
         navController = navController,
-        startDestination = Routes.Home.name,
+        startDestination = Routes.AppliedJobPage.name,
     ) {
         composable(route = Routes.Home.name) {
             HomePage(
@@ -24,6 +26,18 @@ fun Navigation(navController: NavHostController, innerPaddingValues: PaddingValu
             )
         }
 
-//        composable {  }
+        composable(route = Routes.AppliedJobPage.name){
+            AppliedJobsPage(
+                navController = navController,
+                innerPadding = innerPaddingValues
+            )
+        }
+        composable(route = Routes.JobDetailPage.name){
+            JobDetailPage(
+                navController = navController,
+                innerPadding = innerPaddingValues
+            )
+        }
     }
 }
+

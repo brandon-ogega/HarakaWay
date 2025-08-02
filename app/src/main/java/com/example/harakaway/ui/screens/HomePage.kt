@@ -64,353 +64,350 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
         mutableStateOf("")
     }
     Box(
-        modifier = Modifier.fillMaxSize()
-    ){
-        AsyncImage(
-            model = R.drawable.bg2,
-            contentDescription = "maps",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-    }
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier
-            .padding(vertical = 16.dp)
-            .verticalScroll(rememberScrollState())
-    ){
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+            .fillMaxSize()
+            .background(Color.Black)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 24.dp, horizontal = 16.dp)
+                .padding(vertical = 16.dp)
+                .verticalScroll(rememberScrollState())
         ) {
-            Row{
-                Text(text = "Hello, \nAlexander!",
-                    fontSize = 32.sp,
-                    lineHeight = 40.sp,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 24.dp, horizontal = 16.dp)
+            ) {
+                Row {
+                    Text(
+                        text = "Hello, \nAlexander!",
+                        fontSize = 32.sp,
+                        lineHeight = 40.sp,
+                    )
+                }
+                Column {
+                    AsyncImage(
+                        model = R.drawable.super_mario,
+                        contentDescription = "Profile image of user - super mario",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(CircleShape)
+                            .border(
+                                brush = Brush.horizontalGradient(
+                                    colors = listOf(Color.Red, Color.Blue, Color.Green),
+                                    startX = 0.0f,
+                                    endX = 500.0f,
+                                    tileMode = TileMode.Repeated
+                                ),
+                                width = 4.dp,
+                                shape = RoundedCornerShape(32.dp)
+                            )
+                    )
+                }
+            }
+            Column {
+                Row(
+                    modifier = Modifier
+                        .padding(vertical = 0.5.dp, horizontal = 16.dp)
+                ) {
+                    Text(
+                        text = "Wish you a good day.",
+                        color = Color.LightGray
+                    )
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                TextField(
+                    value = searchInput.value,
+                    placeholder = { Text(text = "Search for job title", color = Color.LightGray) },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Filled.Search,
+                            contentDescription = "search job",
+                            tint = Color.DarkGray
+                        )
+                    },
+                    trailingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.filter),
+                            contentDescription = "filter",
+                            tint = Color.DarkGray
+                        )
+                    },
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.DarkGray,
+                        unfocusedContainerColor = Color.DarkGray,
+                        errorContainerColor = Color.Red,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp, horizontal = 8.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    onValueChange = { newValue ->
+                        searchInput.value = newValue
+                    }
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp, horizontal = 16.dp)
+            ) {
+                Text(
+                    text = "Recent Jobs",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                )
+                Text(
+                    text = "View all",
+                    fontWeight = FontWeight.Light,
+                    fontSize = 16.sp,
                 )
             }
             Column {
-                AsyncImage(
-                    model = R.drawable.super_mario,
-                    contentDescription = "Profile image of user - super mario",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(CircleShape)
-                        .border(
-                            brush = Brush.horizontalGradient(
-                                colors = listOf(Color.Red, Color.Blue, Color.Green),
-                                startX = 0.0f,
-                                endX = 500.0f,
-                                tileMode = TileMode.Repeated
-                            ),
-                            width = 4.dp,
-                            shape = RoundedCornerShape(32.dp)
-                        )
-                )
-            }
-        }
-        Column {
-            Row(
-                modifier = Modifier
-                    .padding(vertical = 0.5.dp,horizontal = 16.dp)
-            ){
-                Text(
-                    text = "Wish you a good day.",
-                    color = Color.LightGray
-                )
-            }
-        }
-       Row(
-           horizontalArrangement = Arrangement.Center,
-           modifier = Modifier
-               .fillMaxWidth()
-               .padding(8.dp)
-       ){
-           TextField(
-               value = searchInput.value,
-               placeholder = { Text(text = "Search for job title", color = Color.LightGray)},
-               leadingIcon = {
-                   Icon(
-                       imageVector = Icons.Filled.Search,
-                       contentDescription = "search job",
-                       tint = Color.DarkGray
-                   )
-               },
-               trailingIcon = {
-                   Icon(
-                       painter = painterResource(R.drawable.filter),
-                       contentDescription = "filter",
-                       tint = Color.DarkGray
-                   )
-               },
-               colors = TextFieldDefaults.colors(
-                   focusedContainerColor = Color.DarkGray,
-                   unfocusedContainerColor = Color.DarkGray ,
-                   errorContainerColor = Color.Red,
-                   focusedIndicatorColor = Color.Transparent,
-                   unfocusedIndicatorColor = Color.Transparent,
-               ),
-               modifier = Modifier
-                   .fillMaxWidth()
-                   .padding(vertical = 8.dp, horizontal = 8.dp),
-               shape = RoundedCornerShape(12.dp),
-               onValueChange = { newValue ->
-                   searchInput.value = newValue
-               }
-           )
-       }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 12.dp, horizontal = 16.dp)
-        ){
-            Text(
-                text = "Recent Jobs",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-            )
-            Text(
-                text = "View all",
-                fontWeight = FontWeight.Light,
-                fontSize = 16.sp,
-            )
-        }
-       Column{
-           Card(
-               colors = CardColors(
-                   containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                   contentColor = Color.LightGray,
-                   disabledContainerColor = Color.DarkGray,
-                   disabledContentColor = Color.DarkGray,
-               ),
-               modifier = Modifier
-                   .fillMaxWidth()
-                   .padding(8.dp)
-                   .clip(RoundedCornerShape(32.dp)),
-               elevation = CardDefaults.cardElevation(8.dp),
-           ){
-               Column(
-                   modifier = Modifier
-                       .fillMaxWidth()
-                       .padding(16.dp)
-               ){
-                   Row(
-                       modifier = Modifier
-                           .fillMaxWidth(),
-                       horizontalArrangement = Arrangement.Center,
-                       verticalAlignment = Alignment.CenterVertically,
-                   ) {
-                       AsyncImage(
-                           model = R.drawable.spotify,
-                           contentDescription = "icon",
-                           modifier = Modifier
-                               .size(150.dp)
-                       )
-                   }
-                   Spacer(modifier = Modifier.height(12.dp))
-                   Text(
-                       text = "Spotify",
-                       fontSize = 16.sp,
-                       modifier = Modifier.align(Alignment.CenterHorizontally)
-                   )
-                   Text(
-                       text = "Product Designer",
-                       fontSize = 18.sp,
-                       fontWeight = FontWeight.Bold,
-                       color = Color.White,
-                       modifier = Modifier.align(Alignment.CenterHorizontally)
-                   )
-               }
-               Row(
-                   modifier = Modifier
-                       .fillMaxWidth()
-                       .padding(vertical = 8.dp),
-                   horizontalArrangement = Arrangement.Center
-               ){
-                   Card{
-                       Text(
-                           text = "Fulltime",
-                           fontWeight = FontWeight.Light,
-                           fontSize = 12.sp,
-                           modifier = Modifier
-                               .padding(2.dp)
-                       )
-                   }
-                   Spacer(modifier = Modifier.width(8.dp))
-                   Card{
-                       Text(
-                           text = "Remote",
-                           fontWeight = FontWeight.Light,
-                           fontSize = 12.sp,
-                           modifier = Modifier
-                               .padding(2.dp)
-                       )
-                   }
-               }
-               Row(
-                   horizontalArrangement = Arrangement.Center,
-                   verticalAlignment = Alignment.CenterVertically,
-               ){
-                   Button(
-                       colors = ButtonColors(
-                           containerColor = Color.Yellow,
-                           contentColor = Color.Black,
-                           disabledContainerColor = Color.Gray,
-                           disabledContentColor = Color.DarkGray
-                       ),
-                       onClick = {},
-                       modifier = Modifier
-                           .padding(horizontal = 128.dp)
-                   ){
-                       Text(
-                           text = "Browse",
-                       )
-                   }
-               }
-           }
-       }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 12.dp, horizontal = 16.dp)
-        ){
-            Text(
-                text = "Category",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-            )
-            Text(
-                text = "View all",
-                fontWeight = FontWeight.Light,
-                fontSize = 16.sp,
-            )
-        }
-
-        val configuration = LocalConfiguration.current
-        val screenHeight = configuration.screenHeightDp.dp
-        val screenWidth = configuration.screenWidthDp.dp
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(screenHeight *1/3)
-                .padding(16.dp)
-        ) {
-//       colum categories
-            Column(
-                verticalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(screenWidth *2/3)
-             ){
                 Card(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                ) {
-                   Column(
-                       horizontalAlignment = Alignment.CenterHorizontally,
-                       verticalArrangement = Arrangement.Center,
-                       modifier = Modifier
-                           .fillMaxWidth()
-                   ){
-                       Text(
-                           text = "Recommended"  ,
-                           fontWeight = FontWeight.Bold,
-                           textAlign = TextAlign.Center,
-                           modifier = Modifier
-                               .fillMaxWidth()
-                       )
-                       Text(
-                           text =   "244+ Jobs",
-                           textAlign = TextAlign.Center,
-                           fontSize = 12.sp,
-                           fontWeight = FontWeight.Light,
-                           modifier = Modifier
-                               .fillMaxWidth()
-                       )
-                   }
-                }
-                Spacer(modifier = Modifier.padding(vertical = 4.dp))
-                Card(
+                    colors = CardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                        contentColor = Color.LightGray,
+                        disabledContainerColor = Color.DarkGray,
+                        disabledContentColor = Color.DarkGray,
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f)
+                        .padding(8.dp)
+                        .clip(RoundedCornerShape(32.dp)),
+                    elevation = CardDefaults.cardElevation(8.dp),
                 ) {
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-//                            .fillMaxHeight()
-                    ){
-                        Text(
-                            text = "Recommended"  ,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
+                            .padding(4.dp)
+                    ) {
+                        Row(
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            AsyncImage(
+                                model = R.drawable.spotify,
+                                contentDescription = "icon",
+                                modifier = Modifier
+                                    .size(150.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Spotify",
+                            fontSize = 16.sp,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
                         )
                         Text(
-                            text =   "244+ Jobs",
-                            textAlign = TextAlign.Center,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Light,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                            text = "Product Designer",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
                         )
                     }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Card {
+                            Text(
+                                text = "Fulltime",
+                                fontWeight = FontWeight.Light,
+                                fontSize = 12.sp,
+                                modifier = Modifier
+                                    .padding(2.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Card {
+                            Text(
+                                text = "Remote",
+                                fontWeight = FontWeight.Light,
+                                fontSize = 12.sp,
+                                modifier = Modifier
+                                    .padding(2.dp)
+                            )
+                        }
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Button(
+                            colors = ButtonColors(
+                                containerColor = Color.Yellow,
+                                contentColor = Color.Black,
+                                disabledContainerColor = Color.Gray,
+                                disabledContentColor = Color.DarkGray
+                            ),
+                            onClick = {},
+                            modifier = Modifier
+                                .padding(horizontal = 128.dp)
+                        ) {
+                            Text(
+                                text = "Browse",
+                            )
+                        }
+                    }
                 }
-
             }
-            Spacer(modifier = Modifier.padding(horizontal = 4.dp))
-            Column(
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .width(screenWidth * 1/3))
-            {
-                Card(
+                    .fillMaxWidth()
+                    .padding(vertical = 12.dp, horizontal = 16.dp)
+            ) {
+                Text(
+                    text = "Category",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                )
+                Text(
+                    text = "View all",
+                    fontWeight = FontWeight.Light,
+                    fontSize = 16.sp,
+                )
+            }
+
+            val configuration = LocalConfiguration.current
+            val screenHeight = configuration.screenHeightDp.dp
+            val screenWidth = configuration.screenWidthDp.dp
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(screenHeight * 1 / 3)
+                    .padding(16.dp)
+            ) {
+//       colum categories
+                Column(
+                    verticalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .fillMaxHeight()
-                        .height(screenHeight*1/10)
-                        .align(Alignment.CenterHorizontally)
+                        .width(screenWidth * 2 / 3)
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
+                    Card(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Text(
+                                text = "Recommended",
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                            Text(
+                                text = "244+ Jobs",
+                                textAlign = TextAlign.Center,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Light,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.padding(vertical = 4.dp))
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+//                            .fillMaxHeight()
+                        ) {
+                            Text(
+                                text = "Recommended",
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                            Text(
+                                text = "244+ Jobs",
+                                textAlign = TextAlign.Center,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Light,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
+                    }
+
+                }
+                Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(screenWidth * 1 / 3)
+                )
+                {
+                    Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()
-                    ){
-                        Text(
-                            text = "Recommended"  ,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
+                            .height(screenHeight * 1 / 10)
+                            .align(Alignment.CenterHorizontally)
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
-                        )
-                        Text(
-                            text =   "244+ Jobs",
-                            textAlign = TextAlign.Center,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Light,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        )
+                                .fillMaxHeight()
+                        ) {
+                            Text(
+                                text = "Recommended",
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                            Text(
+                                text = "244+ Jobs",
+                                textAlign = TextAlign.Center,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Light,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
                     }
                 }
-                }
 
+            }
         }
     }
 }
