@@ -37,6 +37,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -60,6 +62,14 @@ class MainActivity : ComponentActivity() {
             keepSplashScreen = false
         }
         enableEdgeToEdge()
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        WindowInsetsControllerCompat(window,window.decorView).apply {
+            isAppearanceLightStatusBars = false
+            isAppearanceLightNavigationBars = false
+        }
+
         setContent {
             HarakaWayTheme {
                 val navigationItems = listOf(

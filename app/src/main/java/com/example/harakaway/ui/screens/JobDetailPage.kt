@@ -19,8 +19,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
@@ -188,7 +186,7 @@ fun JobDetailPage(innerPadding: PaddingValues, navController: NavHostController)
                     modifier = Modifier.clip(CircleShape)
                 ) {
                     Icon(
-                        painter = painterResource(R.drawable.account_balance_wallet_24dp_8c1af6_fill0_wght400_grad0_opsz24),
+                        painter = painterResource(R.drawable.wallet),
                         contentDescription = "basket",
                         modifier = Modifier
                             .padding(20.dp)

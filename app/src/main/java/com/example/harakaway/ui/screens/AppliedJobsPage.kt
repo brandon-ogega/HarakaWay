@@ -3,6 +3,7 @@ package com.example.harakaway.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -126,6 +127,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
 
                 modifier = Modifier
                     .padding(16.dp)
+                    .horizontalScroll(rememberScrollState())
             ){
                 Card(
                     colors = CardColors(
@@ -196,6 +198,79 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
 
                     }
                 }
+                Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+
+                Card(
+                    colors = CardColors(
+                        containerColor = Color.Yellow,
+                        contentColor = Color.DarkGray,
+                        disabledContainerColor = Color.DarkGray,
+                        disabledContentColor = Color.DarkGray,
+                    )
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(vertical = 4.dp, horizontal =8.dp)
+                    ){
+                        Text(
+                            text = "${ApplicationStatus.Accepted}",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clip(CircleShape)
+                                .background(Color.White)){
+                            Text(
+                                text = "$accepted",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+
+                    }
+                }
+                Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+                Card(
+                    colors = CardColors(
+                        containerColor = Color.Yellow,
+                        contentColor = Color.DarkGray,
+                        disabledContainerColor = Color.DarkGray,
+                        disabledContentColor = Color.DarkGray,
+                    )
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(vertical = 4.dp, horizontal =8.dp)
+                    ){
+                        Text(
+                            text = "${ApplicationStatus.Rejected}",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clip(CircleShape)
+                                .background(Color.White)){
+                            Text(
+                                text = "$rejected",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+
+                    }
+                }
+
+
             }
             Column(
                 modifier = Modifier.fillMaxSize()
