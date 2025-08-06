@@ -3,6 +3,7 @@ package com.example.harakaway.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,22 +57,24 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.harakaway.R
+import com.example.harakaway.ui.theme.amber
+import com.example.harakaway.ui.theme.orange
+import com.example.harakaway.ui.theme.sportsGreen
 
 @Composable
 
-fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
-    val searchInput: MutableState<String> = remember{
+fun HomePage(innerPadding: PaddingValues, navController: NavHostController) {
+    val searchInput: MutableState<String> = remember {
         mutableStateOf("")
     }
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp),
             modifier = Modifier
-                .padding(vertical = 16.dp)
+                .padding(vertical = 14.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             Row(
@@ -79,14 +82,19 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 24.dp, horizontal = 16.dp)
+                    .padding(horizontal = 14.dp)
             ) {
-                Row {
+                Column {
                     Text(
-                        text = "Hello, \nAlexander!",
+                        text = "Hello, ",
                         fontSize = 32.sp,
-                        lineHeight = 40.sp,
                     )
+                    Text(
+                        text = "Alexander!",
+                        fontSize = 32.sp,
+                    )
+
+
                 }
                 Column {
                     AsyncImage(
@@ -112,7 +120,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
             Column {
                 Row(
                     modifier = Modifier
-                        .padding(vertical = 0.5.dp, horizontal = 16.dp)
+                        .padding(horizontal = 16.dp)
                 ) {
                     Text(
                         text = "Wish you a good day.",
@@ -121,7 +129,6 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                 }
             }
             Row(
-                horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
@@ -133,19 +140,12 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                         Icon(
                             imageVector = Icons.Filled.Search,
                             contentDescription = "search job",
-                            tint = Color.DarkGray
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = painterResource(R.drawable.filter),
-                            contentDescription = "filter",
-                            tint = Color.DarkGray
+                            tint = Color.LightGray
                         )
                     },
                     colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.DarkGray,
-                        unfocusedContainerColor = Color.DarkGray,
+                        focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                         errorContainerColor = Color.Red,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
@@ -158,13 +158,19 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                         searchInput.value = newValue
                     }
                 )
+
+                Icon(
+                    painter = painterResource(R.drawable.filter),
+                    contentDescription = "filter",
+                    tint = Color.White
+                )
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 4.dp, horizontal = 16.dp)
+                    .padding(horizontal = 16.dp)
             ) {
                 Text(
                     text = "Recent Jobs",
@@ -175,12 +181,13 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                     text = "View all",
                     fontWeight = FontWeight.Light,
                     fontSize = 16.sp,
+                    modifier = Modifier.clickable {}
                 )
             }
             Column {
                 Card(
                     colors = CardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                         contentColor = Color.LightGray,
                         disabledContainerColor = Color.DarkGray,
                         disabledContentColor = Color.DarkGray,
@@ -188,7 +195,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
-                        .clip(RoundedCornerShape(32.dp)),
+                        .clip(RoundedCornerShape(20.dp)),
                     elevation = CardDefaults.cardElevation(8.dp),
                 ) {
                     Column(
@@ -198,16 +205,19 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                     ) {
                         Row(
                             modifier = Modifier
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .padding(16.dp),
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            AsyncImage(
-                                model = R.drawable.spotify,
-                                contentDescription = "icon",
-                                modifier = Modifier
-                                    .size(150.dp)
-                            )
+                            Card {
+                                AsyncImage(
+                                    model = R.drawable.mze,
+                                    contentDescription = "icon",
+                                    modifier = Modifier
+                                        .size(75.dp)
+                                )
+                            }
                         }
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
@@ -235,7 +245,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                                 fontWeight = FontWeight.Light,
                                 fontSize = 12.sp,
                                 modifier = Modifier
-                                    .padding(2.dp)
+                                    .padding(6.dp)
                             )
                         }
                         Spacer(modifier = Modifier.width(8.dp))
@@ -245,7 +255,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                                 fontWeight = FontWeight.Light,
                                 fontSize = 12.sp,
                                 modifier = Modifier
-                                    .padding(2.dp)
+                                    .padding(6.dp)
                             )
                         }
                     }
@@ -276,7 +286,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 12.dp, horizontal = 16.dp)
+                    .padding(8.dp)
             ) {
                 Text(
                     text = "Category",
@@ -287,6 +297,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                     text = "View all",
                     fontWeight = FontWeight.Light,
                     fontSize = 16.sp,
+                    modifier = Modifier.clickable {}
                 )
             }
 
@@ -298,7 +309,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(screenHeight * 1 / 3)
-                    .padding(16.dp)
+                    .padding(horizontal = 16.dp)
             ) {
 //       colum categories
                 Column(
@@ -308,6 +319,12 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                         .width(screenWidth * 2 / 3)
                 ) {
                     Card(
+                        colors = CardColors(
+                            containerColor = sportsGreen,
+                            contentColor = Color.LightGray,
+                            disabledContainerColor = Color.DarkGray,
+                            disabledContentColor = Color.DarkGray,
+                        ),
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth()
@@ -317,9 +334,11 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                             verticalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .padding(40.dp)
                         ) {
                             Text(
                                 text = "Recommended",
+                                color = Color.Black,
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
@@ -327,6 +346,7 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                             )
                             Text(
                                 text = "244+ Jobs",
+                                color = Color.Black,
                                 textAlign = TextAlign.Center,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Light,
@@ -337,6 +357,12 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                     }
                     Spacer(modifier = Modifier.padding(vertical = 4.dp))
                     Card(
+                        colors = CardColors(
+                            containerColor = amber,
+                            contentColor = Color.LightGray,
+                            disabledContainerColor = Color.DarkGray,
+                            disabledContentColor = Color.DarkGray,
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
@@ -346,17 +372,19 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                             verticalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
-//                            .fillMaxHeight()
+                                .padding(40.dp)
                         ) {
                             Text(
-                                text = "Recommended",
+                                text = "Recently Added",
+                                color = Color.Black,
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
                             Text(
-                                text = "244+ Jobs",
+                                text = "250+ Jobs",
+                                color = Color.Black,
                                 textAlign = TextAlign.Center,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Light,
@@ -375,6 +403,12 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                 )
                 {
                     Card(
+                        colors = CardColors(
+                            containerColor = orange,
+                            contentColor = Color.LightGray,
+                            disabledContainerColor = Color.DarkGray,
+                            disabledContentColor = Color.DarkGray,
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()
@@ -389,14 +423,16 @@ fun HomePage(innerPadding: PaddingValues,navController: NavHostController) {
                                 .fillMaxHeight()
                         ) {
                             Text(
-                                text = "Recommended",
+                                text = "Nearby",
+                                color = Color.Black,
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
                             Text(
-                                text = "244+ Jobs",
+                                text = "231+ Jobs",
+                                color = Color.Black,
                                 textAlign = TextAlign.Center,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Light,

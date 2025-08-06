@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.DateRange
@@ -28,7 +29,11 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -36,6 +41,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImagePainter.State.Empty.painter
 import com.example.harakaway.data.models.BottomNavBarItem
 import com.example.harakaway.ui.components.Navigation
 import com.example.harakaway.ui.screens.Routes
@@ -59,8 +65,8 @@ class MainActivity : ComponentActivity() {
                 val navigationItems = listOf(
                     BottomNavBarItem(
                         title = Routes.Home.name,
-                        iconSelected = Icons.Filled.Home,
-                        iconNotSelected = Icons.Outlined.Home
+                        iconCustomSelected = R.drawable.home,
+                        iconCustomNotSelected = R.drawable.home,
                     ),
                     BottomNavBarItem(
                         title = Routes.AppliedJobPage.name,
@@ -69,8 +75,8 @@ class MainActivity : ComponentActivity() {
                     ),
                     BottomNavBarItem(
                         title = Routes.JobDetailPage.name,
-                        iconSelected = Icons.Filled.DateRange,
-                        iconNotSelected = Icons.Outlined.DateRange,
+                        iconCustomSelected = R.drawable.contract,
+                        iconCustomNotSelected = R.drawable.contract,
                     ),
                 )
                 var selectedItem by rememberSaveable {
@@ -85,17 +91,17 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         if (currentRoute != "HomePage") {
                             NavigationBar(
-                                containerColor = Color.DarkGray
+                                containerColor = MaterialTheme.colorScheme.inverseOnSurface
                             ) {
                                 navigationItems.forEachIndexed { index, item ->
                                     NavigationBarItem(
                                         selected = selectedItem == index,
                                         colors = NavigationBarItemColors(
-                                            selectedIconColor = Color.LightGray,
-                                            selectedTextColor = Color.LightGray,
-                                            selectedIndicatorColor = Color.White,
-                                            unselectedIconColor = Color.Gray,
-                                            unselectedTextColor = Color.Gray,
+                                            selectedIconColor = Color.Gray,
+                                            selectedTextColor = Color.Gray,
+                                            selectedIndicatorColor = Color.Yellow,
+                                            unselectedIconColor = Color.DarkGray,
+                                            unselectedTextColor = Color.DarkGray,
                                             disabledIconColor = Color.Gray,
                                             disabledTextColor = Color.Gray,
                                         ),
@@ -104,43 +110,27 @@ class MainActivity : ComponentActivity() {
                                             navController.navigate(route = item.title)
                                             println("Navigations....")
                                         },
-                                        icon = {
+                                        icon ={
                                             if (selectedItem == index) {
-                                                item.iconSelected?.let {
+                                                item.iconCustomSelected?.let {
                                                     Column(verticalArrangement = Arrangement.SpaceEvenly) {
                                                         Icon(
-                                                            imageVector = it,
+                                                            painter = painterResource(it),
                                                             contentDescription = "icon of ${item.title}",
                                                             modifier = Modifier.size(24.dp),
-                                                            tint = Color.LightGray
+                                                            tint = Color.Black
                                                         )
+ 
                                                     }
                                                 }
-                                            } else if (item.iconNotSelected != null) {
-                                                item.iconNotSelected?.let {
+                                            } else {
+                                                item.iconCustomNotSelected?.let {
                                                     Icon(
-                                                        imageVector = it,
+                                                        painter = painterResource(it),
                                                         contentDescription = "icon of ${item.title}",
-                                                        modifier = Modifier.size(24.dp)
+                                                        modifier = Modifier.size(24.dp),
+                                                        tint = Color.LightGray
                                                     )
-                                                }
-                                            }
-                                            else if(item.iconCustomSelected != null){
-                                                item.iconCustomSelected?.let{
-//                                                    Icon(
-//                                                        imageVector = Int,
-//                                                       contentDescription ="Icon of ${item.title}",
-//                                                        modifier = Modifier.size(24.dp)
-//                                                    )
-                                                }
-                                            }
-                                            else if (item.iconCustomNotSelected != null){
-                                                item.iconCustomNotSelected?.let{
-//                                                    Icon(
-//                                                        imageVector = Int,
-//                                                        contentDescription ="Icon of ${item.title}",
-//                                                        modifier = Modifier.size(24.dp)
-//                                                    )
                                                 }
                                             }
                                         },

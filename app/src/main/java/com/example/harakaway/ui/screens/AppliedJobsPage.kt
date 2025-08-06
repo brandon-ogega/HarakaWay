@@ -36,11 +36,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.harakaway.R
+import com.example.harakaway.data.models.ApplicationStatus
 
 @Composable
 fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostController) {
@@ -52,7 +54,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
         Column(
             verticalArrangement = Arrangement.spacedBy(2.dp),
             modifier = Modifier
-                .padding(vertical = 16.dp)
+                .padding(vertical = 14.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             Row(
@@ -60,13 +62,16 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = 14.dp)
             ) {
-                Row {
+                Column {
                     Text(
-                        text = "Applied, \nJobs",
+                        text = "Applied,",
                         fontSize = 32.sp,
-                        lineHeight = 40.sp,
+                    )
+                    Text(
+                        text = "Jobs",
+                        fontSize = 32.sp,
                     )
                 }
                 Column {
@@ -100,6 +105,98 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                     color = Color.LightGray
                 )
             }
+            var text = "All"
+            var all  = 5
+            var applied  = 0
+            var accepted  = 0
+            var rejected  = 0
+
+//            ApplicationStatus.entries.forEach {
+//                item ->
+//                when(item){
+//                    ApplicationStatus.All -> "${ApplicationStatus.All } $all"
+//                    ApplicationStatus.Applied -> TODO()
+//                    ApplicationStatus.Accepted -> TODO()
+//                    ApplicationStatus.Rejected -> TODO()
+//                }
+//            }
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+
+                modifier = Modifier
+                    .padding(16.dp)
+            ){
+                Card(
+                    colors = CardColors(
+                        containerColor = Color.Yellow,
+                        contentColor = Color.DarkGray,
+                        disabledContainerColor = Color.DarkGray,
+                        disabledContentColor = Color.DarkGray,
+                    )
+                ) {
+                   Row(
+                       verticalAlignment = Alignment.CenterVertically,
+                               modifier = Modifier.padding(vertical = 4.dp, horizontal =8.dp)
+                   ){
+                       Text(
+                           text = "${ApplicationStatus.All}",
+                           fontWeight = FontWeight.Bold,
+                           fontSize = 14.sp,
+                           modifier = Modifier.padding(8.dp)
+                       )
+                       Box(
+                           contentAlignment = Alignment.Center,
+                           modifier = Modifier
+                           .size(24.dp)
+                           .clip(CircleShape)
+                           .background(Color.White)){
+                           Text(
+                               text = "$all",
+                               fontSize = 12.sp,
+                               fontWeight = FontWeight.Bold,
+                               textAlign = TextAlign.Center,
+                           )
+                       }
+
+                   }
+                }
+                Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+                Card(
+                    colors = CardColors(
+                        containerColor = Color.Yellow,
+                        contentColor = Color.DarkGray,
+                        disabledContainerColor = Color.DarkGray,
+                        disabledContentColor = Color.DarkGray,
+                    )
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(vertical = 4.dp, horizontal =8.dp)
+                    ){
+                        Text(
+                            text = "${ApplicationStatus.Applied}",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clip(CircleShape)
+                                .background(Color.White)){
+                            Text(
+                                text = "$applied",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+
+                    }
+                }
+            }
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -123,7 +220,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                     ) {
                        Card {
                            AsyncImage(
-                               model = R.drawable.spotify,
+                               model = R.drawable.mze,
                                contentDescription = "Icon",
                                contentScale = ContentScale.Crop,
                                modifier = Modifier
@@ -278,7 +375,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                             )
 
                         }
-                        Spacer(modifier = Modifier.width(65.dp))
+                        Spacer(modifier = Modifier.width(115.dp))
                         Icon(
                             imageVector = Icons.Outlined.Email,
                             contentDescription = "xx",
@@ -361,7 +458,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                                 text = "UK,London",
                                 modifier = Modifier.padding(horizontal = 1.5.dp)
                             )
-                            Spacer(modifier = Modifier.padding(vertical = 32.dp,horizontal = 60.dp))
+                            Spacer(modifier = Modifier.padding(vertical = 32.dp,horizontal = 70.dp))
                             Card(
                                 colors = CardColors(
                                     containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
