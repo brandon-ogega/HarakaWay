@@ -38,6 +38,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -53,20 +54,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.harakaway.R
+import com.example.harakaway.ui.theme.HomeViewModel
 import com.example.harakaway.ui.theme.amber
 import com.example.harakaway.ui.theme.orange
 import com.example.harakaway.ui.theme.sportsGreen
 
 @Composable
 
-fun HomePage(innerPadding: PaddingValues, navController: NavHostController) {
-    val searchInput: MutableState<String> = remember {
-        mutableStateOf("")
-    }
+fun HomePage(innerPadding: PaddingValues, navController: NavHostController,viewModel: HomeViewModel= viewModel() ) {
+    val searchInput = viewModel.searchInput.value
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -134,7 +135,8 @@ fun HomePage(innerPadding: PaddingValues, navController: NavHostController) {
                     .padding(8.dp)
             ) {
                 TextField(
-                    value = searchInput.value,
+                    value = searchInput,
+                    onValueChange = {viewModel.onSearchInputChange(it)},
                     placeholder = { Text(text = "Search for job title", color = Color.LightGray) },
                     leadingIcon = {
                         Icon(
@@ -154,9 +156,6 @@ fun HomePage(innerPadding: PaddingValues, navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(vertical = 8.dp, horizontal = 8.dp),
                     shape = RoundedCornerShape(12.dp),
-                    onValueChange = { newValue ->
-                        searchInput.value = newValue
-                    }
                 )
 
                 Icon(

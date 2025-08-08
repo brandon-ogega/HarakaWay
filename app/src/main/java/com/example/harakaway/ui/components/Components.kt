@@ -33,7 +33,7 @@ fun Navigation(navController: NavHostController, innerPaddingValues: PaddingValu
 
     NavHost(
         navController = navController,
-        startDestination = Routes.JobDetailPage.name,
+        startDestination = Routes.Home.name,
     ) {
         composable(route = Routes.Home.name) {
             HomePage(

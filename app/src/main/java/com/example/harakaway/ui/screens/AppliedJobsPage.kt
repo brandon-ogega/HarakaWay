@@ -272,6 +272,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
 
 
             }
+
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
