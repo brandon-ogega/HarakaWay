@@ -4,6 +4,5 @@ enum class Routes {
     Home,
     AppliedJobPage,
     JobDetailPage,
-    Profile,
     Login,
 }

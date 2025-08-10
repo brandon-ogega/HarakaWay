@@ -106,7 +106,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                     color = Color.LightGray
                 )
             }
-            var text = "All"
+            "All"
             var all  = 5
             var applied  = 0
             var accepted  = 0
@@ -304,7 +304,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                            )
                        }
                         Spacer(modifier = Modifier.width(8.dp))
-                        Column() {
+                        Column {
                             Text(
                                 text = "Spotify",
                                 fontWeight = FontWeight.ExtraLight,
@@ -363,14 +363,14 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                             )
                         }
                     }
-                    Row(){
+                    Row {
                         Text(
                             text = "$2 - $5k/Month",
                             fontSize = 18.sp,
                             modifier = Modifier.padding(vertical = 8.dp,horizontal = 16.dp)
                         )
                     }
-                    Column(){
+                    Column {
                         Row(
                             modifier = Modifier.padding(horizontal = 14.dp)
                         ){
@@ -437,7 +437,7 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                             )
                         }
                         Spacer(modifier = Modifier.width(8.dp))
-                        Column() {
+                        Column {
                             Text(
                                 text = "Google",
                                 fontWeight = FontWeight.ExtraLight,
@@ -513,14 +513,14 @@ fun AppliedJobsPage(innerPadding: PaddingValues, navController: NavHostControlle
                             )
                         }
                     }
-                    Row(){
+                    Row {
                         Text(
                             text = "$3 - $6k/Month",
                             fontSize = 18.sp,
                             modifier = Modifier.padding(vertical = 8.dp,horizontal = 16.dp)
                         )
                     }
-                    Column(){
+                    Column {
                         Row(
                             modifier = Modifier.padding(horizontal = 14.dp)
                         ){

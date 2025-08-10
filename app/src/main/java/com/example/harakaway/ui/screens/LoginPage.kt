@@ -54,7 +54,7 @@ fun LoginPage(innerPadding: PaddingValues) {
     }
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
-    val screenWidth = configuration.screenWidthDp.dp
+    configuration.screenWidthDp.dp
 
     Column(
         verticalArrangement = Arrangement.Top,
