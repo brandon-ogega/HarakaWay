@@ -43,6 +43,7 @@ android {
 dependencies {
     implementation(platform(libs.bom))
     implementation(libs.postgrest.kt)
+    implementation (libs.androidx.navigation.compose.v275)
     implementation(libs.auth.kt)
     implementation(libs.realtime.kt)
     implementation(libs.ktor.client.android)

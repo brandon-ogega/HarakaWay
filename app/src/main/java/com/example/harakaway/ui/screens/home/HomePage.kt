@@ -49,6 +49,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.harakaway.R
+import com.example.harakaway.ui.screens.Routes
 import com.example.harakaway.ui.screens.home.HomeViewModel
 import com.example.harakaway.ui.theme.amber
 import com.example.harakaway.ui.theme.orange
@@ -170,7 +171,7 @@ fun HomePage(innerPadding: PaddingValues, navController: NavHostController,viewM
                     text = "View all",
                     fontWeight = FontWeight.Light,
                     fontSize = 16.sp,
-                    modifier = Modifier.clickable {}
+                    modifier = Modifier.clickable {navController.navigate(Routes.AppliedJobPage.name)}
                 )
             }
             Column {
@@ -259,7 +260,9 @@ fun HomePage(innerPadding: PaddingValues, navController: NavHostController,viewM
                                 disabledContainerColor = Color.Gray,
                                 disabledContentColor = Color.DarkGray
                             ),
-                            onClick = {},
+                            onClick = {
+                                navController.navigate(Routes.JobDetailPage.name)
+                            },
                             modifier = Modifier
                                 .padding(horizontal = 128.dp)
                         ) {
@@ -286,7 +289,7 @@ fun HomePage(innerPadding: PaddingValues, navController: NavHostController,viewM
                     text = "View all",
                     fontWeight = FontWeight.Light,
                     fontSize = 16.sp,
-                    modifier = Modifier.clickable {}
+                    modifier = Modifier.clickable {navController.navigate(Routes.AppliedJobPage.name)}
                 )
             }
 
