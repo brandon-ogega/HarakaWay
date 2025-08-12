@@ -26,6 +26,7 @@ import com.example.harakaway.ui.screens.AppliedJobsPage
 import com.example.harakaway.ui.screens.home.HomePage
 import com.example.harakaway.ui.screens.JobDetailPage
 import com.example.harakaway.ui.screens.Routes
+import com.example.harakaway.ui.screens.admin.AdminForm
 
 // navigation
 @Composable
@@ -54,8 +55,14 @@ fun Navigation(navController: NavHostController, innerPaddingValues: PaddingValu
                 innerPadding = innerPaddingValues
             )
         }
-
-    }
+        composable(route = Routes.AdminForm.name){
+            AdminForm(
+                navController = navController,
+                innerPadding = innerPaddingValues,
+                modifier = Modifier
+            )
+        }
+        }
 }
 
 @Composable

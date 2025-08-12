@@ -5,4 +5,5 @@ enum class Routes {
     AppliedJobPage,
     JobDetailPage,
     Login,
+    AdminForm
 }

@@ -5,12 +5,14 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.OpenableColumns
 import android.webkit.MimeTypeMap
+import android.widget.Toast
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,6 +35,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.harakaway.R
 import com.example.harakaway.data.models.Job
 import java.text.SimpleDateFormat
@@ -42,6 +45,7 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AdminForm(
+    innerPadding: PaddingValues, navController: NavHostController,
     adminViewModel: AdminViewModel = viewModel(),
     modifier: Modifier
 ){
@@ -149,6 +153,26 @@ fun AdminForm(
             Text("Progress: ${progress.value}%")
         }
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
+        Button(
+            onClick = {
+                var result =   adminViewModel.createJob(
+                  companyName= companyName,
+                    title = title,
+                    jobCategory = jobCategory,
+                    salary = salary,
+                    location = location,
+                    status = status,
+                    image_url = ""
+                    )
+                if (result!==null){
+                    Toast.makeText(context, "${title} task created!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        ) {
+            Text(
+                text = "Create task"
+            )
+        }
 
     }
 }
@@ -211,7 +235,3 @@ fun createReturnJob(image_url: String,companyName: String, title: String,jobCate
     return job
 }
 
-fun convertMillisToDate(millis: Long): String {
-    val formatter = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
-    return formatter.format(Date(millis))
-}
