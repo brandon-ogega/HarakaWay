@@ -112,7 +112,7 @@ fun AdminForm(
             },
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.padding(vertical = 8.dp))
+        Spacer(modifier = Modifier.padding(vertical = 6.dp))
         OutlinedTextField(
             value =status,
             label = { Text(text = "Status") },
@@ -144,15 +144,10 @@ fun AdminForm(
                         contentDescription = "Camera button",
                         tint = Color.Unspecified
                     )
-                    Spacer(modifier = Modifier.padding(vertical = 2.dp))
-                    Text(text = "Select Image")
-                    Spacer(modifier = Modifier.padding(vertical = 2.dp))
                 }
             }
-            Spacer(modifier = Modifier.padding(vertical = 8.dp))
-            Text("Progress: ${progress.value}%")
         }
-        Spacer(modifier = Modifier.padding(vertical = 8.dp))
+        Spacer(modifier = Modifier.padding(vertical = 4.dp))
         Button(
             onClick = {
                 var result =   adminViewModel.createJob(
@@ -162,15 +157,20 @@ fun AdminForm(
                     salary = salary,
                     location = location,
                     status = status,
-                    image_url = ""
                     )
                 if (result!==null){
-                    Toast.makeText(context, "${title} task created!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "${title} job created!", Toast.LENGTH_SHORT).show()
+                    companyName = ""
+                    title = ""
+                    jobCategory = ""
+                    salary = ""
+                    location = ""
+                    status = ""
                 }
             }
         ) {
             Text(
-                text = "Create task"
+                text = "Create Job"
             )
         }
 
@@ -199,7 +199,7 @@ fun getExtensionFromUri(context: Context, uri: Uri): String? {
 
 
 @Composable
-fun launchFilePicker(context: Context,todoViewModel: AdminViewModel): ManagedActivityResultLauncher<Intent, ActivityResult> {
+fun launchFilePicker(context: Context,adminViewModel: AdminViewModel): ManagedActivityResultLauncher<Intent, ActivityResult> {
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -215,7 +215,7 @@ fun launchFilePicker(context: Context,todoViewModel: AdminViewModel): ManagedAct
             }"
 
             if (fileBytes != null) {
-                todoViewModel.insertImage(fileName, fileBytes)
+               adminViewModel.insertImage(fileName, fileBytes)
             }
         }
     }

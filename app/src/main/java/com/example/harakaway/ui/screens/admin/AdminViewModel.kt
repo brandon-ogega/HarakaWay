@@ -26,7 +26,7 @@ class AdminViewModel: ViewModel(){
     ))
 
     val job: StateFlow<Job> get() = _job
-    fun createJob(image_url: String,companyName: String, title: String,jobCategory: String,salary: String,location: String,status: String) {
+    fun createJob(companyName: String, title: String,jobCategory: String,salary: String,location: String,status: String) {
         viewModelScope.launch {
             _job.value = _job.value.copy(
                 companyName = companyName

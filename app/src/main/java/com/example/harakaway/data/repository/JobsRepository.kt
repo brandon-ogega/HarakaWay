@@ -27,19 +27,19 @@ class JobsRepository : JobsService{
         install(Storage)
     }
     override suspend fun createJob(job: Job): Job? {
-       val result = supabase.from("job").insert(job){
+       val result = supabase.from("Job").insert(job){
            select()
        }.decodeSingle<Job>()
         return result
     }
 
     override suspend fun getAllJobs(): List<Job> {
-        val job = supabase.from("job").select().decodeList<Job>()
+        val job = supabase.from("Job").select().decodeList<Job>()
         return job
     }
 
     override suspend fun getJob(id: Int): Job?{
-        val job = supabase.from("job").select {
+        val job = supabase.from("Job").select {
             filter {
                 Job::id eq id
             }
@@ -48,9 +48,8 @@ class JobsRepository : JobsService{
     }
 
     override suspend fun updateJob(job: Job): Job? {
-     val job = supabase.from("job").update(
-         job
-     ) {
+     val job = supabase.from("Job").update(
+         job   ) {
          select()
          filter {
           eq("id",job.id!!)
@@ -80,7 +79,7 @@ class JobsRepository : JobsService{
     }
 
     override suspend fun deletePlace(id: Int): Boolean {
-        supabase.from("job").delete {
+        supabase.from("Job").delete {
             filter {
                 eq("id", id)
             }
