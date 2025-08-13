@@ -27,6 +27,7 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonColors
@@ -64,36 +65,37 @@ import com.example.harakaway.ui.theme.sportsGreen
 fun HomePage(innerPadding: PaddingValues, navController: NavHostController,viewModel: HomeViewModel= viewModel() ) {
     val searchInput = viewModel.searchInput.value
     Scaffold(
-        floatingActionButton = {
-            IconButton(
-                colors = IconButtonColors(
-                    containerColor = Color.Blue,
-                    contentColor = Color.White,
-                    disabledContainerColor = Color.Gray,
-                    disabledContentColor = Color.DarkGray
-                ),
-                onClick = {navController.navigate(Routes.AdminForm.name)}
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Add,
-                    contentDescription = "Button of Adding New Jobs"
-                )
-            }
-        }
+//        floatingActionButton = {
+//            IconButton(
+//                colors = IconButtonColors(
+//                    containerColor = Color.Blue,
+//                    contentColor = Color.White,
+//                    disabledContainerColor = Color.Gray,
+//                    disabledContentColor = Color.DarkGray
+//                ),
+//                onClick = {navController.navigate(Routes.AdminForm.name)}
+//            ) {
+//                Icon(
+//                    imageVector = Icons.Filled.Add,
+//                    contentDescription = "Button of Adding New Jobs"
+//                )
+//            }
+//        }
     ) { innerPadding ->
         Column(
             verticalArrangement = Arrangement.spacedBy(2.dp),
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(vertical = 14.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+
+            Spacer(modifier = Modifier.height(30.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 14.dp)
+                    .padding(horizontal = 14.dp,vertical = 14.dp)
             ) {
                 Column {
                     Text(
@@ -455,6 +457,8 @@ fun HomePage(innerPadding: PaddingValues, navController: NavHostController,viewM
                 }
 
             }
+            Spacer(modifier = Modifier.height(100.dp))
+
         }
     }
 }

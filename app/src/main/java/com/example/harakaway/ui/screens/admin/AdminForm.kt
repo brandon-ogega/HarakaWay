@@ -49,7 +49,7 @@ fun AdminForm(
     adminViewModel: AdminViewModel = viewModel(),
     modifier: Modifier
 ){
-    var progress = adminViewModel.uploadProgress.collectAsState()
+    adminViewModel.uploadProgress.collectAsState()
 
     var companyName by remember { mutableStateOf("") }
     var title by remember { mutableStateOf("") }

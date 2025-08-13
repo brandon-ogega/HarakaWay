@@ -8,18 +8,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -82,12 +90,42 @@ class MainActivity : ComponentActivity() {
                 var selectedItem by rememberSaveable {
                     mutableIntStateOf(0)
                 }
+                var barState by rememberSaveable {
+                    mutableStateOf(false)
+                }
                 val navController: NavHostController = rememberNavController()
 
                 val currentBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = currentBackStackEntry?.destination?.route
+               barState = when(currentRoute){
+                   Routes.Home.name -> {
+                        true
+                    }
 
+                    else -> {
+                        false
+                    }
+                }
                 Scaffold(
+
+                        floatingActionButton = {
+                            if (barState){
+                            IconButton(
+                                colors = IconButtonColors(
+                                    containerColor = Color.Blue,
+                                    contentColor = Color.White,
+                                    disabledContainerColor = Color.Gray,
+                                    disabledContentColor = Color.DarkGray
+                                ),
+                                onClick = {navController.navigate(Routes.AdminForm.name)}
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Filled.Add,
+                                    contentDescription = "Button of Adding New Jobs"
+                                )
+                            }
+                        }else{}
+                    },
                     bottomBar = {
                         if (currentRoute != "HomePage") {
                             NavigationBar(
@@ -144,10 +182,10 @@ class MainActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier
                             .background(MaterialTheme.colorScheme.inverseOnSurface)
-                            .padding(innerPadding)
                             .fillMaxSize()
                     ) {
-                        Navigation(navController, innerPadding)                    }
+                        Navigation(navController, innerPadding)
+                    }
                     }
                 }
             }

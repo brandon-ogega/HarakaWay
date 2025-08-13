@@ -22,7 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import coil3.compose.AsyncImage
-import com.example.harakaway.ui.screens.AppliedJobsPage
+import com.example.harakaway.ui.screens.applied.AppliedJobsPage
 import com.example.harakaway.ui.screens.home.HomePage
 import com.example.harakaway.ui.screens.JobDetailPage
 import com.example.harakaway.ui.screens.Routes

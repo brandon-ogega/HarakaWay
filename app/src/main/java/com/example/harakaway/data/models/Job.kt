@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Job(
+data class  Job(
     val id: Int? = null,
     val createdAt: String? = null,
     val image_url: String,
